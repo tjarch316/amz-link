@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Opening Amazon</title>
+<script>
+  // Opens amazon.com/dp/<ASIN> with no referrer, so Amazon shows the normal
+  // product page instead of the /clp/ page it serves to visitors from Google.
+  (function () {
+    var a = (new URLSearchParams(location.search).get("a") || "").trim().toUpperCase();
+    if (/^[A-Z0-9]{10}$/.test(a)) {
+      location.replace("https://www.amazon.com/dp/" + a);
+    } else {
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.textContent = "Not a valid ASIN.";
+      });
+    }
+  })();
+</script>
+</head>
+<body>Opening Amazon...</body>
+</html>
